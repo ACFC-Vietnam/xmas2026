@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Tra cứu điều ước · Make A Wish 2026 🔑</title>
+  <meta name="description" content="Dùng chìa khoá điều ước để xem lá thư Make A Wish 2026 của bạn.">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#0f2a20">
+  <meta name="referrer" content="no-referrer">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Tra cứu điều ước · Make A Wish 2026 🔑">
+  <meta property="og:description" content="Dùng chìa khoá điều ước để xem lá thư của bạn đang đi tới đâu rồi nhé.">
+  <meta property="og:image" content="https://acfc-vietnam.github.io/xmas2026/assets/img/og-make-a-wish.png">
+  <meta property="og:url" content="https://acfc-vietnam.github.io/xmas2026/wish-status/">
+
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔑</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;700&family=Dancing+Script:wght@700&family=Patrick+Hand&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/site.css">
+  <link rel="stylesheet" href="../assets/css/wish-status.css">
+</head>
+<body>
+  <canvas id="snow" aria-hidden="true"></canvas>
+
+  <div class="wrap">
+    <header class="site-header">
+      <a class="brand" href="../">
+        <span class="brand-mark" aria-hidden="true">🎄</span>
+        <span class="brand-text">ACFC Xmas<small>2026</small></span>
+      </a>
+      <a class="back-link" href="../">← Tất cả hoạt động</a>
+    </header>
+
+    <section class="hero hero-compact">
+      <h1>Tra cứu điều ước</h1>
+    </section>
+
+    <main class="status-main">
+      <!-- Before opening time -->
+      <section class="panel" id="view-locked" hidden>
+        <div class="lock-icon" aria-hidden="true">🔒</div>
+        <h2>Hẹn bạn 00:00 ngày 21/12 nhé 🎄</h2>
+        <p>Hòm thư điều ước đang được niêm phong cẩn thận. Quay lại sau nhé!</p>
+        <div class="countdown" id="countdown" aria-live="off">
+          <div><b id="cd-d">0</b><span>ngày</span></div>
+          <div><b id="cd-h">00</b><span>giờ</span></div>
+          <div><b id="cd-m">00</b><span>phút</span></div>
+          <div><b id="cd-s">00</b><span>giây</span></div>
+        </div>
+      </section>
+
+      <!-- Lookup -->
+      <section class="panel" id="view-lookup" hidden>
+        <div class="lock-icon" aria-hidden="true">🔑</div>
+        <h2>Nhập chìa khoá điều ước của bạn</h2>
+        <p>Chìa khoá nằm ở màn hình cảm ơn và trong email chúng mình đã gửi bạn đó.</p>
+        <form id="lookup-form" class="lookup-form" autocomplete="off">
+          <label class="sr-only" for="key-input">Chìa khoá điều ước</label>
+          <input id="key-input" name="key" inputmode="text" autocapitalize="off" autocorrect="off" spellcheck="false"
+                 maxlength="20" placeholder="VD: mY7kQ2" required>
+          <button class="btn" type="submit" id="lookup-btn">Mở thư ✉️</button>
+        </form>
+        <p class="hint">Chìa khoá phân biệt chữ hoa và chữ thường nhé.</p>
+        <p class="error" id="lookup-error" role="alert" hidden></p>
+      </section>
+
+      <!-- Result -->
+      <section class="letter" id="view-result" hidden aria-live="polite">
+        <div class="letter-top">
+          <span class="status-pill" id="r-status">Đang chờ cập nhật</span>
+          <span class="letter-date" id="r-date"></span>
+        </div>
+        <p class="status-note" id="r-status-note" hidden></p>
+
+        <p class="greeting" id="r-greeting"></p>
+        <dl class="wish-lines">
+          <div id="row-gift"><dt>Món quà mình muốn gửi</dt><dd id="r-gift"></dd></div>
+          <div id="row-reason"><dt>Vì…</dt><dd id="r-reason"></dd></div>
+          <div id="row-message"><dt>Lời chúc Giáng Sinh</dt><dd id="r-message"></dd></div>
+        </dl>
+        <p class="signoff">Thân mến,<br><span id="r-sender"></span></p>
+        <p class="sender-team" id="r-sender-team"></p>
+
+        <div class="letter-actions">
+          <button class="btn ghost" type="button" id="btn-another">Tra cứu chìa khoá khác</button>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">ACFC · HR Communication · Xmas 2026</footer>
+  </div>
+
+  <script src="../assets/js/config.js"></script>
+  <script src="../assets/js/snow.js"></script>
+  <script src="../assets/js/wish-status.js"></script>
+</body>
+</html>

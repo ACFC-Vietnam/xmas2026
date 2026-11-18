@@ -1,0 +1,178 @@
+/* Make A Wish page — embed frame + sealing ceremony. Placeholder art until the KV lands. */
+
+.hero-compact { padding-top: 6px; }
+.hero-compact h1 { font-size: clamp(38px, 6vw, 60px); }
+
+/* ---------- Embed frame ---------- */
+.letter-desk { padding: 18px 0 40px; }
+.letter-frame {
+  position: relative;
+  width: min(760px, 100%);
+  margin: 0 auto;
+  min-height: 480px;
+  border-radius: 10px;
+  background: var(--paper);
+  box-shadow: 0 24px 60px rgba(0,0,0,.4), 0 0 0 10px rgba(251,246,236,.06);
+  overflow: hidden;
+}
+.letter-frame.is-transparent { background: transparent; box-shadow: none; overflow: visible; }
+.letter-frame iframe { display: block; width: 100%; border: 0; min-height: 480px; position: relative; z-index: 1; }
+.embed-loading {
+  position: absolute; inset: 0; display: grid; justify-items: center; align-content: start; padding-top: 140px; z-index: 0;
+  font-family: var(--hand); font-size: 22px; color: var(--ink-soft);
+}
+.letter-frame.is-transparent .embed-loading { color: var(--paper); }
+
+/* ---------- Ceremony overlay ---------- */
+.ceremony {
+  position: fixed; inset: 0; z-index: 50;
+  display: grid; place-items: center;
+  padding: 20px;
+  background: rgba(8, 24, 18, .82);
+  backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+  overflow-y: auto;
+  animation: fade-in .35s ease both;
+}
+.ceremony[hidden] { display: none; }
+.ceremony-inner {
+  width: min(520px, 100%);
+  text-align: center;
+  color: var(--ink);
+  background: var(--paper);
+  border-radius: 18px;
+  padding: 30px 26px 22px;
+  box-shadow: 0 30px 80px rgba(0,0,0,.5);
+  position: relative;
+}
+
+/* Envelope stage */
+.env-stage { height: 210px; display: grid; place-items: center; perspective: 900px; transition: height .5s ease .1s; }
+.env { position: relative; width: 260px; height: 168px; margin-top: 30px; transition: transform .6s cubic-bezier(.5,0,.3,1.3); }
+.env-back, .env-front, .env-flap, .env-letter, .env-seal { position: absolute; }
+.env-back { inset: 0; background: #d9c6a2; border-radius: 6px; }
+.env-letter {
+  left: 16px; right: 16px; top: 10px; height: 140px;
+  background:
+    repeating-linear-gradient(transparent 0 21px, rgba(59,42,32,.12) 21px 22px),
+    #fffdf7;
+  border-radius: 3px;
+  box-shadow: 0 2px 6px rgba(0,0,0,.12);
+  transform: translateY(-110px);
+  padding: 14px 14px 0; text-align: left;
+  font-family: var(--script); font-size: 20px; color: var(--red);
+}
+.env-front {
+  inset: 0;
+  background: #efe3cc;
+  clip-path: polygon(0 28%, 50% 72%, 100% 28%, 100% 100%, 0 100%);
+  border-radius: 6px;
+}
+.env-flap {
+  left: 0; right: 0; top: 0; height: 98px;
+  background: #e6d6b6;
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  transform-origin: top center;
+  transform: rotateX(180deg);
+  z-index: 3;
+}
+.env-seal {
+  left: 50%; top: 74px; width: 52px; height: 52px; margin-left: -26px;
+  border-radius: 50%;
+  display: grid; place-items: center; font-size: 20px;
+  background: radial-gradient(circle at 35% 30%, #e05a4f, var(--red) 55%, var(--red-dark));
+  box-shadow: 0 0 0 5px rgba(179,40,45,.22), 0 4px 8px rgba(0,0,0,.3);
+  opacity: 0; transform: scale(2.6);
+  z-index: 4;
+}
+
+.ceremony.play .env-letter { animation: letter-in .9s .2s cubic-bezier(.5,0,.3,1) forwards; }
+.ceremony.play .env-letter { z-index: 1; }
+.ceremony.play .env-front { z-index: 2; }
+.ceremony.play .env-flap { animation: flap-close .7s 1.15s cubic-bezier(.5,0,.3,1.35) forwards; }
+.ceremony.play .env-seal { animation: seal-stamp .45s 1.85s cubic-bezier(.3,1.7,.5,1) forwards; }
+.ceremony.play .env { animation: env-settle .6s 2.45s ease forwards; }
+
+/* Key reveal */
+.key-reveal > * { opacity: 0; transform: translateY(10px); }
+.ceremony.play .key-reveal > * { animation: rise .5s ease forwards; }
+.ceremony.play .key-reveal > *:nth-child(1) { animation-delay: 2.6s; }
+.ceremony.play .key-reveal > *:nth-child(2) { animation-delay: 2.75s; }
+.ceremony.play .key-reveal > *:nth-child(3) { animation: key-drop .7s 2.9s cubic-bezier(.3,1.5,.5,1) forwards; }
+.ceremony.play .key-reveal > *:nth-child(4) { animation-delay: 3.3s; }
+.ceremony.play .key-reveal > *:nth-child(5) { animation-delay: 3.45s; }
+.ceremony.play .key-reveal > *:nth-child(6) { animation-delay: 3.6s; }
+.ceremony.play .key-reveal > *:nth-child(7) { animation-delay: 3.75s; }
+
+.key-reveal h2 { font-family: var(--script); color: var(--red); font-size: 32px; margin: 0 0 6px; line-height: 1.15; }
+.key-label { margin: 0 0 14px; color: var(--ink-soft); }
+
+/* The key */
+.key {
+  display: inline-flex; align-items: center;
+  margin: 4px auto 18px;
+  filter: drop-shadow(0 8px 14px rgba(168,132,47,.4));
+  cursor: copy;
+}
+.key-bow {
+  width: 64px; height: 64px; border-radius: 50%; flex: none;
+  background: radial-gradient(circle at 50% 50%, var(--paper) 0 13px, transparent 14px),
+              linear-gradient(135deg, var(--gold-light), var(--gold) 60%, #a8842f);
+}
+.key-code {
+  margin-left: -6px;
+  padding: 12px 18px 12px 22px;
+  background: linear-gradient(180deg, var(--gold-light), var(--gold) 70%, #a8842f);
+  font: 700 28px/1 'Courier New', ui-monospace, monospace; letter-spacing: 4px;
+  color: #3a2a0c;
+  border-radius: 0 6px 6px 0;
+  user-select: all; -webkit-user-select: all;
+}
+.key-teeth {
+  width: 30px; height: 52px; flex: none; margin-left: -1px;
+  background:
+    linear-gradient(180deg, var(--gold-light), var(--gold)) left top / 100% 50% no-repeat,
+    linear-gradient(var(--gold) 0 0) 0 100% / 9px 100% no-repeat,
+    linear-gradient(var(--gold) 0 0) 16px 75% / 8px 75% no-repeat;
+  border-radius: 0 4px 0 0;
+}
+
+.key-actions { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+.key-note { color: var(--ink-soft); line-height: 1.55; margin: 16px 0 4px; }
+.key-thanks { font-family: var(--hand); font-size: 18px; color: var(--ink); margin: 8px 0 6px; }
+.link-btn { background: none; border: 0; color: var(--ink-soft); text-decoration: underline; font: 500 14px var(--sans); cursor: pointer; padding: 10px; }
+
+.toast {
+  position: fixed; left: 50%; bottom: 28px; z-index: 60;
+  transform: translate(-50%, 20px); opacity: 0;
+  background: var(--ink); color: var(--paper);
+  padding: 10px 18px; border-radius: 999px; font-size: 14px;
+  transition: all .25s ease;
+}
+.toast.show { opacity: 1; transform: translate(-50%, 0); }
+
+@keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
+@keyframes letter-in { from { transform: translateY(-110px); } to { transform: translateY(18px); } }
+@keyframes flap-close { from { transform: rotateX(180deg); } to { transform: rotateX(0deg); } }
+@keyframes seal-stamp { from { opacity: 0; transform: scale(2.6); } to { opacity: 1; transform: scale(1); } }
+@keyframes env-settle { to { transform: scale(.62) translateY(-40px); } }
+@keyframes rise { to { opacity: 1; transform: none; } }
+@keyframes key-drop { from { opacity: 0; transform: translateY(-30px) rotate(-12deg) scale(.7); } to { opacity: 1; transform: none; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .env-letter { transform: translateY(18px); }
+  .env-flap { transform: none; }
+  .env-seal { opacity: 1; transform: none; }
+  .key-reveal > * { opacity: 1; transform: none; }
+}
+
+@media (max-width: 576px) {
+  .letter-frame { border-radius: 6px; box-shadow: 0 16px 40px rgba(0,0,0,.4); }
+  .ceremony { padding: 12px; align-items: start; }
+  .ceremony-inner { padding: 22px 16px 16px; margin-top: 4vh; }
+  .env-stage { height: 180px; }
+  .env { transform: scale(.85); }
+  .key-reveal h2 { font-size: 27px; }
+  .key-bow { width: 52px; height: 52px; background: radial-gradient(circle at 50% 50%, var(--paper) 0 10px, transparent 11px), linear-gradient(135deg, var(--gold-light), var(--gold) 60%, #a8842f); }
+  .key-code { font-size: 22px; letter-spacing: 2px; padding: 10px 14px 10px 18px; }
+  .key-actions .btn { width: 100%; }
+}
