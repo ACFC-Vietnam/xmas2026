@@ -3,8 +3,8 @@
    Placeholder palette: swap the variables once the event KV lands.
    Page 1 = envelope front · Page 2 = letter · Thank-you = sealed + key
    ========================================================= */
-/* Handwriting fonts (Dancing Script, Patrick Hand) are NOT imported here: Tally's API filter
-   refuses @import. They fall back to Be Vietnam Pro (the theme font) until an import is added. */
+/* Paste into Tally: Customize → Custom CSS. Handwriting fonts (Dancing Script, Patrick Hand)
+   fall back to Be Vietnam Pro unless they are loaded separately. */
 
 :root {
   --mw-paper: #FBF6EC;
@@ -228,7 +228,7 @@
   box-shadow: 0 10px 24px rgba(0,0,0,.18);
   animation: mw-drop .6s ease-out both;
 }
-/* flap + wax seal */
+/* flap */
 .tally-page-thank-you::after {
   content: "";
   position: absolute; left: 50%; top: 34px;
@@ -236,8 +236,6 @@
   clip-path: polygon(0 0, 100% 0, 50% 100%);
   background: #e8d9bc;
   transform-origin: top center;
-  display: flex; align-items: flex-end; justify-content: center;
-  font-size: 0;
   animation: mw-flap .7s .6s cubic-bezier(.5,0,.3,1.4) both;
 }
 .tally-block-03882688-753e-4889-97aa-3cbb1a4b152e { position: relative; }
