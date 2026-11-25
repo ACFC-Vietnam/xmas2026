@@ -20,7 +20,7 @@ var CONFIG = {
   // Otherwise paste the spreadsheet ID from its URL.
   SPREADSHEET_ID: '',
 
-  // Tab name Tally writes to. Blank = first tab.
+  // Tab name Tally writes to. Blank = auto-detect the tab with a "Submission ID" column.
   SHEET_NAME: '',
 
   // Lookups are refused before this moment (Vietnam time). Must match assets/js/config.js.
@@ -73,7 +73,7 @@ function doGet(e) {
 function findWish_(key) {
   var sheet = getSheet_();
   var lastRow = sheet.getLastRow(), lastCol = sheet.getLastColumn();
-  if (lastRow < 2) return null;
+  if (lastRow < 2 || lastCol < 1) return null;
 
   var headers = sheet.getRange(1, 1, 1, lastCol).getDisplayValues()[0];
   var cols = mapColumns_(headers);
@@ -107,9 +107,22 @@ function mapColumns_(headers) {
 
 function getSheet_() {
   var ss = CONFIG.SPREADSHEET_ID ? SpreadsheetApp.openById(CONFIG.SPREADSHEET_ID) : SpreadsheetApp.getActiveSpreadsheet();
-  var sheet = CONFIG.SHEET_NAME ? ss.getSheetByName(CONFIG.SHEET_NAME) : ss.getSheets()[0];
-  if (!sheet) throw new Error('Sheet not found — check CONFIG.SHEET_NAME');
-  return sheet;
+  if (!ss) throw new Error('No spreadsheet: open the script from the responses Sheet (Extensions → Apps Script) or fill CONFIG.SPREADSHEET_ID');
+  if (CONFIG.SHEET_NAME) {
+    var named = ss.getSheetByName(CONFIG.SHEET_NAME);
+    if (!named) throw new Error('Tab "' + CONFIG.SHEET_NAME + '" not found — check CONFIG.SHEET_NAME');
+    return named;
+  }
+  // No tab name given: use the first tab whose header row has a "Submission ID" column.
+  var needle = FIELDS.key.toLowerCase();
+  var tabs = ss.getSheets();
+  for (var i = 0; i < tabs.length; i++) {
+    var lastCol = tabs[i].getLastColumn();
+    if (lastCol < 1) continue;
+    var headers = tabs[i].getRange(1, 1, 1, lastCol).getDisplayValues()[0];
+    if (headers.some(function (h) { return String(h).toLowerCase().indexOf(needle) !== -1; })) return tabs[i];
+  }
+  throw new Error('No tab with a "' + FIELDS.key + '" column yet. Connect the Tally → Google Sheets sync and send one test wish, then run again.');
 }
 
 function json_(obj) {
@@ -121,6 +134,7 @@ function json_(obj) {
 /** Logs every column header and which output field it maps to. Run once after Tally creates the sheet. */
 function logHeaders() {
   var sheet = getSheet_();
+  console.log('Using tab: "' + sheet.getName() + '"');
   var headers = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getDisplayValues()[0];
   var cols = mapColumns_(headers);
   var byIndex = {};
