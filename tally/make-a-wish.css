@@ -66,7 +66,7 @@
 .tally-required-indicator { color: var(--mw-red) !important; }
 
 /* ---------- Hand-drawn underline inputs ---------- */
-.tally-app div[class*=' tally-block-input'] div:has(> input) { width: 100% !important; max-width: none !important; }
+.tally-app div[class*=' tally-block-input'] div:has(input) { width: 100% !important; max-width: none !important; }
 .tally-app div[class*=' tally-block-input'] input {
   width: 100% !important;
   height: 44px !important;
@@ -128,10 +128,9 @@
 }
 .tally-block-84c41b7c-fa89-425c-9525-dc5470295870::before {
   content: "✂";
-  position: absolute; top: -16px; left: -6px;
-  font-size: 24px; line-height: 1; color: var(--mw-ink-soft);
-  background: var(--mw-paper); padding: 0 6px;
-  transform: rotate(-90deg);
+  position: absolute; top: -15px; left: -4px;
+  font-size: 22px; line-height: 1; color: var(--mw-ink-soft);
+  background: var(--mw-paper); padding: 0 8px 0 2px;
 }
 
 /* Recipient choices as sticker tags */
