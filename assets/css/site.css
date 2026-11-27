@@ -132,7 +132,6 @@ a.event-card:hover { transform: rotate(0deg) translateY(-6px); }
 .event-card h2 { font-family: var(--script); font-size: 40px; margin: 2px 0 0; color: var(--red); line-height: 1.05; font-weight: 700; }
 .event-card p { margin: 0; color: var(--ink-soft); line-height: 1.5; font-size: 19px; }
 .event-card .cta { margin-top: auto; padding-top: 12px; font-size: 21px; color: var(--red); }
-.event-card .cta::after { content: " ✎"; }
 .event-card .stamp {
   position: absolute; top: 22px; right: 22px; width: 56px; height: 66px;
   display: grid; place-items: center; font-size: 24px;
@@ -146,6 +145,7 @@ a.event-card:hover { transform: rotate(0deg) translateY(-6px); }
 .event-card.soon {
   background: transparent; color: var(--paper); box-shadow: none;
   border: 2.5px dashed rgba(255, 251, 243, .3);
+  border-radius: var(--wob-card);
 }
 .event-card.soon h2 { color: var(--gold-light); }
 .event-card.soon p { color: rgba(255, 251, 243, .72); }
