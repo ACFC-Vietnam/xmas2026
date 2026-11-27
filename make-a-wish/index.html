@@ -19,7 +19,7 @@
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💌</text></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;700&family=Dancing+Script:wght@700&family=Patrick+Hand&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Patrick+Hand&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../assets/css/site.css">
   <link rel="stylesheet" href="../assets/css/make-a-wish.css">
 </head>
@@ -54,7 +54,7 @@
 
   <!-- Sealing ceremony + key, shown after the form is submitted -->
   <div class="ceremony" id="ceremony" hidden aria-live="polite">
-    <div class="ceremony-inner" role="dialog" aria-modal="true" aria-labelledby="ceremony-title">
+    <div class="ceremony-inner paper tape" role="dialog" aria-modal="true" aria-labelledby="ceremony-title">
       <div class="env-stage" aria-hidden="true">
         <div class="env">
           <div class="env-back"></div>
@@ -76,17 +76,18 @@
         </div>
 
         <div class="key-actions">
-          <button class="btn gold" id="btn-copy" type="button">📋 Sao chép chìa khoá</button>
-          <button class="btn ghost" id="btn-save" type="button">🖼️ Lưu ảnh chìa khoá</button>
+          <button class="btn gold" id="btn-copy" type="button" data-track="copy_key">📋 Sao chép chìa khoá</button>
+          <button class="btn ghost" id="btn-save" type="button" data-track="save_key_image">🖼️ Lưu ảnh chìa khoá</button>
         </div>
         <p class="key-note">Giữ kỹ chiếc chìa khoá này nhé 🔑<br>Chúng mình cũng đã gửi một bản vào email của bạn rồi đó!</p>
         <p class="key-thanks">Cảm ơn bạn đã cùng chúng mình lan toả yêu thương mùa Giáng Sinh này 🎄</p>
-        <button class="link-btn" id="btn-close" type="button">Đóng</button>
+        <button class="link-btn" id="btn-close" type="button" data-track="close_ceremony">Đóng</button>
       </div>
     </div>
   </div>
 
   <script src="../assets/js/config.js"></script>
+  <script src="../assets/js/analytics.js"></script>
   <script src="../assets/js/snow.js"></script>
   <script src="../assets/js/make-a-wish.js"></script>
   <script src="https://tally.so/widgets/embed.js" async onload="window.__tallyReady && window.__tallyReady()"></script>

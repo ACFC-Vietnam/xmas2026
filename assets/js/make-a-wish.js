@@ -13,7 +13,7 @@
   var transparent = !!cfg.tallyTransparentBackground;
   if (transparent) frame.classList.add('is-transparent');
   var src = 'https://tally.so/embed/' + encodeURIComponent(cfg.tallyFormId) +
-    '?alignLeft=1&hideTitle=0&dynamicHeight=1' + (transparent ? '&transparentBackground=1' : '');
+    '?hideTitle=0&dynamicHeight=1' + (transparent ? '&transparentBackground=1' : '');
   iframe.setAttribute('data-tally-src', src);
 
   var loaded = false;
@@ -42,7 +42,11 @@
     }
     if (!msg || typeof msg.event !== 'string') return;
 
+    if (msg.event === 'Tally.FormLoaded') window.xmasTrack && window.xmasTrack('form_loaded');
+
     if (msg.event === 'Tally.FormPageView') {
+      var pg = (msg.payload && msg.payload.page) || '';
+      window.xmasTrack && window.xmasTrack('form_page_view', { form_page: String(pg) });
       // Keep the top of the letter in view when moving between pages (matters on phones).
       var top = frame.getBoundingClientRect().top + window.pageYOffset - 12;
       if (window.pageYOffset > top) window.scrollTo({ top: top, behavior: 'smooth' });
@@ -51,6 +55,7 @@
     if (msg.event === 'Tally.FormSubmitted') {
       var p = msg.payload || {};
       var key = p.id || p.submissionId || p.responseId || '';
+      window.xmasTrack && window.xmasTrack('form_submitted');
       showCeremony(String(key));
     }
   });

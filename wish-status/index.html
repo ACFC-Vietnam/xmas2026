@@ -18,7 +18,7 @@
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔑</text></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;700&family=Dancing+Script:wght@700&family=Patrick+Hand&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Patrick+Hand&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../assets/css/site.css">
   <link rel="stylesheet" href="../assets/css/wish-status.css">
 </head>
@@ -40,7 +40,7 @@
 
     <main class="status-main">
       <!-- Before opening time -->
-      <section class="panel" id="view-locked" hidden>
+      <section class="panel paper tape" id="view-locked" hidden>
         <div class="lock-icon" aria-hidden="true">🔒</div>
         <h2>Hẹn bạn 00:00 ngày 21/12 nhé 🎄</h2>
         <p>Hòm thư điều ước đang được niêm phong cẩn thận. Quay lại sau nhé!</p>
@@ -53,7 +53,7 @@
       </section>
 
       <!-- Lookup -->
-      <section class="panel" id="view-lookup" hidden>
+      <section class="panel paper tape tape-green" id="view-lookup" hidden>
         <div class="lock-icon" aria-hidden="true">🔑</div>
         <h2>Nhập chìa khoá điều ước của bạn</h2>
         <p>Chìa khoá nằm ở màn hình cảm ơn và trong email chúng mình đã gửi bạn đó.</p>
@@ -68,7 +68,7 @@
       </section>
 
       <!-- Result -->
-      <section class="letter" id="view-result" hidden aria-live="polite">
+      <section class="letter paper tape tape-gold" id="view-result" hidden aria-live="polite">
         <div class="letter-top">
           <span class="status-pill" id="r-status">Đang chờ cập nhật</span>
           <span class="letter-date" id="r-date"></span>
@@ -94,6 +94,7 @@
   </div>
 
   <script src="../assets/js/config.js"></script>
+  <script src="../assets/js/analytics.js"></script>
   <script src="../assets/js/snow.js"></script>
   <script src="../assets/js/wish-status.js"></script>
 </body>

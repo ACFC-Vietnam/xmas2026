@@ -19,7 +19,7 @@
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎄</text></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;700&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Patrick+Hand&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/site.css">
 </head>
 <body>
@@ -39,7 +39,7 @@
     </section>
 
     <main class="events" id="events">
-      <a class="event-card" href="make-a-wish/">
+      <a class="event-card paper tape" href="make-a-wish/" data-track="open_make_a_wish">
         <span class="stamp" aria-hidden="true">💌</span>
         <span class="tag">Đang mở · đến 20/12</span>
         <h2>Make A Wish</h2>
@@ -48,7 +48,7 @@
       </a>
 
       <!-- Revealed automatically from 21/12/2026 00:00 (see script below). -->
-      <a class="event-card" href="wish-status/" id="card-wish-status" hidden>
+      <a class="event-card paper tape tape-green" href="wish-status/" id="card-wish-status" data-track="open_wish_status" hidden>
         <span class="stamp" aria-hidden="true">🔑</span>
         <span class="tag">Đã mở</span>
         <h2>Tra cứu điều ước</h2>
@@ -67,6 +67,7 @@
   </div>
 
   <script src="assets/js/config.js"></script>
+  <script src="assets/js/analytics.js"></script>
   <script src="assets/js/snow.js"></script>
   <script>
     (function () {

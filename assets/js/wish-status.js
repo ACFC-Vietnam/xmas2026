@@ -48,8 +48,9 @@
     fetch(url, { method: 'GET', redirect: 'follow' })
       .then(function (r) { return r.json(); })
       .then(function (data) {
-        if (data && data.ok) { render(data.wish); return; }
         var code = data && data.code;
+        window.xmasTrack && window.xmasTrack('wish_lookup', { result: data && data.ok ? 'found' : String(code || 'error').toLowerCase() });
+        if (data && data.ok) { render(data.wish); return; }
         if (code === 'NOT_OPEN') { show(vLocked); timer = setInterval(tick, 1000); tick(); return; }
         if (code === 'NOT_FOUND') setError('Không tìm thấy lá thư nào với chìa khoá này. Bạn kiểm tra lại chữ hoa, chữ thường nhé 🔍');
         else if (code === 'INVALID_KEY') setError('Chìa khoá chưa đúng định dạng, bạn kiểm tra lại nhé.');

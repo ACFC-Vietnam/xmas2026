@@ -12,7 +12,10 @@ window.XMAS_CONFIG = {
   // false = the form keeps its own paper background inside a letter frame (safe default).
   // Set to true ONLY after tally/make-a-wish.css is pasted into Tally's Custom CSS box,
   // so the envelope/letter cards float directly on the snowy scene.
-  tallyTransparentBackground: false,
+  tallyTransparentBackground: true,
+
+  // Google Analytics 4 Measurement ID (looks like G-XXXXXXXXXX). Blank = analytics off.
+  ga4MeasurementId: '',
 
   // Paste the Apps Script web-app URL (ends in /exec) after deploying apps-script/Code.gs.
   appsScriptUrl: ''
