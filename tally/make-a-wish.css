@@ -1,283 +1,289 @@
 /* =========================================================
-   Make A Wish 2026 — Tally custom CSS (form LDKGNO)
-   Placeholder palette: swap the variables once the event KV lands.
-   Page 1 = envelope front · Page 2 = letter · Thank-you = sealed + key
+   Make A Wish 2026 — Tally custom CSS (form LDKGNO) · v2 "handcrafted"
+   Paste into Tally: Customize → Custom CSS (replace everything).
+   Theme font is set to Patrick Hand in Tally's own font setting.
+   Colours are placeholders until the event KV lands: edit the variables.
    ========================================================= */
-/* Paste into Tally: Customize → Custom CSS. Handwriting fonts (Dancing Script, Patrick Hand)
-   fall back to Be Vietnam Pro unless they are loaded separately. */
 
 :root {
-  --mw-paper: #FBF6EC;
-  --mw-paper-line: rgba(59, 42, 32, 0.12);
-  --mw-kraft: #EFE3CC;
+  --mw-paper: #FFFBF3;
+  --mw-paper-2: #F6ECDA;
   --mw-ink: #3B2A20;
-  --mw-ink-soft: #7A6555;
-  --mw-red: #B3282D;
-  --mw-red-dark: #8C1D22;
-  --mw-green: #1F4D3A;
-  --mw-gold: #C9A24A;
-  --mw-script: 'Dancing Script', 'Be Vietnam Pro', sans-serif;
+  --mw-ink-soft: #85705F;
+  --mw-line: rgba(59, 42, 32, 0.22);
+  --mw-red: #B8322F;
+  --mw-red-soft: rgba(184, 50, 47, 0.12);
+  --mw-green: #2F5D4A;
+  --mw-gold: #D4A848;
+  --mw-gold-soft: rgba(212, 168, 72, 0.28);
   --mw-hand: 'Patrick Hand', 'Be Vietnam Pro', sans-serif;
-  --mw-sans: 'Be Vietnam Pro', sans-serif;
-  --mw-line: 34px;
+  --mw-rule: 38px;
+  /* irregular, hand-cut corners */
+  --mw-wob-card: 34px 22px 38px 24px / 24px 38px 22px 34px;
+  --mw-wob-pill: 40px 18px 36px 20px / 20px 36px 18px 40px;
+  --mw-wob-line: 0 0 60% 40% / 0 0 5px 3px;
 }
 
-.tally-app, .tally-app * { font-family: var(--mw-sans); }
+.tally-app, .tally-app * { font-family: var(--mw-hand) !important; }
+.tally-app { -webkit-font-smoothing: antialiased; }
 
-/* ---------- Shared card ---------- */
+/* ---------- Paper card ---------- */
 .tally-page {
   position: relative;
-  border-radius: 6px;
-  padding: 44px 48px 36px !important;
-  margin: 32px auto !important;
-  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.28), 0 2px 6px rgba(0, 0, 0, 0.18);
+  max-width: 640px;
+  margin: 40px auto 48px !important;
+  padding: 68px 64px 48px !important;
+  background:
+    radial-gradient(rgba(59, 42, 32, 0.035) 1px, transparent 1.3px) 0 0 / 7px 7px,
+    var(--mw-paper);
+  border-radius: var(--mw-wob-card);
+  box-shadow: 0 2px 0 rgba(59, 42, 32, 0.06), 0 26px 50px -22px rgba(0, 0, 0, 0.45);
+}
+/* washi tape holding the paper */
+.tally-page::before {
+  content: "";
+  position: absolute; top: -14px; left: 50%;
+  width: 136px; height: 32px; margin-left: -68px;
+  background: repeating-linear-gradient(45deg, rgba(184, 50, 47, 0.78) 0 9px, rgba(255, 251, 243, 0.7) 9px 18px);
+  clip-path: polygon(0 12%, 4% 0, 96% 0, 100% 14%, 97% 50%, 100% 86%, 96% 100%, 4% 100%, 0 88%, 3% 50%);
+  transform: rotate(-3deg);
+  opacity: 0.9;
+  z-index: 3;
 }
 
-/* Form title */
+/* Progress bar off (two pages only) */
+.tally-progress-bar-item { display: none !important; }
+
+/* Title + intro */
 .tally-block-form-title h1 {
-  font-family: var(--mw-script) !important;
-  font-weight: 700 !important;
-  color: var(--mw-red) !important;
-  font-size: 40px !important;
-  line-height: 1.15 !important;
+  font-size: 46px !important; font-weight: 400 !important; line-height: 1.12 !important;
+  color: var(--mw-red) !important; letter-spacing: 0.3px;
 }
-.tally-block-31ff1c80-0484-441b-aca0-a69bddae8e4b { color: var(--mw-ink-soft); }
+.tally-block-31ff1c80-0484-441b-aca0-a69bddae8e4b { color: var(--mw-ink-soft) !important; font-size: 19px !important; line-height: 1.55 !important; }
 
 /* Question titles */
-.tally-block-title h3 { color: var(--mw-ink) !important; font-weight: 600 !important; font-size: 16px !important; }
+.tally-block-title h3 { font-size: 21px !important; font-weight: 400 !important; color: var(--mw-ink) !important; }
 .tally-required-indicator { color: var(--mw-red) !important; }
 
-/* ---------- PAGE 1 · Envelope front ---------- */
-.tally-page-1 {
-  background:
-    repeating-linear-gradient(135deg,
-      var(--mw-red) 0 14px, var(--mw-kraft) 14px 24px,
-      var(--mw-green) 24px 38px, var(--mw-kraft) 38px 48px) border-box;
-  border: 10px solid transparent;
-  background-clip: border-box;
-}
-.tally-page-1::before { /* envelope paper inside the airmail border */
-  content: "";
-  position: absolute; inset: 0;
-  background: var(--mw-kraft);
-  border-radius: 2px;
-  z-index: 0;
-}
-.tally-page-1 > * { position: relative; z-index: 1; }
-
-/* Stamp (top-right) */
-.tally-page-1::after {
-  content: "🎄\A XMAS\A 2026";
-  white-space: pre;
-  position: absolute; top: 22px; right: 24px; z-index: 2;
-  width: 74px; height: 88px;
-  display: flex; align-items: center; justify-content: center; text-align: center;
-  font: 700 12px/1.25 var(--mw-sans); letter-spacing: 1px; color: var(--mw-red);
-  background:
-    radial-gradient(circle at 4px 4px, var(--mw-kraft) 3px, transparent 3.5px) -4px -4px / 10px 10px,
-    #fffdf7;
-  outline: 2px dashed var(--mw-red); outline-offset: -8px;
-  transform: rotate(4deg);
-  box-shadow: 0 2px 4px rgba(0,0,0,.15);
-}
-.tally-page-1 .tally-block-form-title { padding-right: 96px; }
-
-/* "Người gửi" / "Người nhận" section labels */
-.tally-page-1 .tally-block-heading-2 h2 {
-  font-family: var(--mw-sans) !important;
-  font-size: 13px !important; font-weight: 700 !important;
-  letter-spacing: 3px; text-transform: uppercase;
-  color: var(--mw-red) !important;
-  display: flex; align-items: center; gap: 12px;
-  margin-top: 18px !important;
-}
-.tally-page-1 .tally-block-heading-2 h2::after {
-  content: ""; flex: 1; height: 0; border-top: 2px solid var(--mw-red); opacity: .35;
-}
-.tally-block-69e464e8-df41-4e5b-a891-9232001b5141 h2::before { content: "✉️"; letter-spacing: 0; }
-.tally-block-84c41b7c-fa89-425c-9525-dc5470295870 h2::before { content: "📮"; letter-spacing: 0; }
-
-/* Address-line inputs */
-.tally-page-1 div[class*=' tally-block-input'] input {
+/* ---------- Hand-drawn underline inputs ---------- */
+.tally-app div[class*=' tally-block-input'] div:has(> input) { width: 100% !important; max-width: none !important; }
+.tally-app div[class*=' tally-block-input'] input {
+  width: 100% !important;
+  height: 44px !important;
   background: transparent !important;
   border: none !important;
-  border-bottom: 2px dotted var(--mw-ink-soft) !important;
-  border-radius: 0 !important;
+  border-bottom: 2px solid var(--mw-line) !important;
+  border-radius: var(--mw-wob-line) !important;
   box-shadow: none !important;
-  font-family: var(--mw-hand) !important;
-  font-size: 20px !important;
+  font-size: 23px !important;
   color: var(--mw-ink) !important;
-  padding-left: 2px !important;
+  padding: 0 4px !important;
+  transition: border-color .2s ease, background-color .2s ease;
 }
-.tally-page-1 div[class*=' tally-block-input'] input:focus {
-  border-bottom: 2px solid var(--mw-red) !important;
+.tally-app div[class*=' tally-block-input'] input:focus {
+  border-bottom-color: var(--mw-red) !important;
+  background-color: rgba(212, 168, 72, 0.08) !important;
 }
-.tally-page-1 input::placeholder { color: rgba(122, 101, 85, .55) !important; font-family: var(--mw-hand) !important; }
+.tally-app input::placeholder, .tally-app textarea::placeholder { color: rgba(133, 112, 95, 0.55) !important; }
 
-/* Recipient choice: postal tick-boxes */
-.tally-page-1 .tally-multiple-choice-option > div {
-  background: rgba(255,255,255,.55) !important;
-  border-radius: 4px !important;
-  box-shadow: inset 0 0 0 1.5px rgba(59,42,32,.25) !important;
+/* ---------- PAGE 1 · Envelope ---------- */
+.tally-page-1 { outline: 2px dashed rgba(184, 50, 47, 0.28); outline-offset: -14px; }
+
+/* hand-drawn stamp */
+.tally-page-1::after {
+  content: "🎄\A Xmas\A 2026";
+  white-space: pre;
+  position: absolute; top: 30px; right: 34px; z-index: 2;
+  width: 78px; height: 92px;
+  display: flex; align-items: center; justify-content: center; text-align: center;
+  font: 18px/1.15 var(--mw-hand); color: var(--mw-red);
+  background:
+    radial-gradient(circle at 5px 5px, var(--mw-paper) 3.5px, transparent 4px) -5px -5px / 11px 11px,
+    #FFF4E2;
+  border-radius: 6px;
+  box-shadow: inset 0 0 0 7px #FFF4E2, inset 0 0 0 9px rgba(184, 50, 47, 0.45), 0 3px 6px rgba(0, 0, 0, 0.12);
+  transform: rotate(6deg);
 }
-.tally-page-1 .tally-multiple-choice-option.tally-multiple-choice-option-selected > div {
-  background: #fffdf7 !important;
-  box-shadow: inset 0 0 0 2px var(--mw-red) !important;
+.tally-page-1 .tally-block-form-title { padding-right: 104px; }
+
+/* Section stickers: "Người gửi" / "Người nhận" */
+.tally-page-1 .tally-block-heading-2 h2 {
+  display: inline-flex !important; align-items: center; gap: 8px;
+  padding: 4px 18px 6px !important;
+  font-size: 24px !important; font-weight: 400 !important;
+  color: var(--mw-green) !important;
+  background: var(--mw-gold-soft);
+  border-radius: var(--mw-wob-pill);
+  transform: rotate(-1.5deg);
+}
+.tally-block-69e464e8-df41-4e5b-a891-9232001b5141 h2::before { content: "✉️"; }
+.tally-block-84c41b7c-fa89-425c-9525-dc5470295870 h2::before { content: "📮"; }
+
+/* Dashed "cut here" line between sender and recipient */
+.tally-block-84c41b7c-fa89-425c-9525-dc5470295870 {
+  position: relative;
+  margin-top: 40px !important;
+  padding-top: 38px !important;
+  border-top: 2.5px dashed var(--mw-line);
+}
+.tally-block-84c41b7c-fa89-425c-9525-dc5470295870::before {
+  content: "✂";
+  position: absolute; top: -16px; left: -6px;
+  font-size: 24px; line-height: 1; color: var(--mw-ink-soft);
+  background: var(--mw-paper); padding: 0 6px;
+  transform: rotate(-90deg);
+}
+
+/* Recipient choices as sticker tags */
+.tally-page-1 .tally-block-multiple-choice-option { display: inline-block !important; margin: 0 10px 4px 0 !important; }
+.tally-page-1 .tally-multiple-choice-option { padding-bottom: 8px !important; }
+.tally-page-1 .tally-multiple-choice-option > div {
+  background: #FFFDF8 !important;
+  border: 2px solid var(--mw-line) !important;
+  border-radius: var(--mw-wob-pill) !important;
+  box-shadow: none !important;
+  padding: 9px 20px !important;
+  font-size: 21px !important;
+  color: var(--mw-ink) !important;
+  transition: transform .15s ease, border-color .15s ease, background-color .15s ease;
+}
+.tally-page-1 .tally-multiple-choice-option > div:hover { transform: rotate(0deg) translateY(-2px) !important; border-color: rgba(184, 50, 47, 0.5) !important; }
+.tally-block-1d612c33-a58b-4c60-a533-e13c4db9a9eb .tally-multiple-choice-option > div { transform: rotate(-1.5deg); }
+.tally-block-7583b7d2-8428-4589-8375-4ef850f16647 .tally-multiple-choice-option > div { transform: rotate(1deg); }
+.tally-block-c4979cd9-0c54-40d1-842b-c6ea01043890 .tally-multiple-choice-option > div { transform: rotate(-0.6deg); }
+.tally-block-8dba4778-10fa-4e16-9594-b1e316918940 .tally-multiple-choice-option > div { transform: rotate(1.4deg); }
+.tally-page-1 .tally-multiple-choice-option.tally-multiple-choice-option-selected > div,
+.tally-page-1 .tally-multiple-choice-option.tally-multiple-choice-option-selected > div:focus-within {
+  background: #FFF1EC !important;
+  border-color: var(--mw-red) !important;
+  color: var(--mw-red) !important;
+  box-shadow: 0 0 0 4px var(--mw-red-soft) !important;
 }
 
 /* ---------- PAGE 2 · The letter ---------- */
 .tally-page-2 {
   background:
-    linear-gradient(90deg, transparent 38px, rgba(179,40,45,.35) 38px 40px, transparent 40px),
+    linear-gradient(90deg, transparent 40px, rgba(184, 50, 47, 0.28) 40px 42px, transparent 42px),
+    radial-gradient(rgba(59, 42, 32, 0.035) 1px, transparent 1.3px) 0 0 / 7px 7px,
     var(--mw-paper);
 }
-.tally-page-2 .tally-block-text,
-.tally-page-2 .tally-block-heading-3 { padding-left: 8px; }
 
-/* Greeting line */
 .tally-block-12782d5e-df6a-4d7a-a45b-1114e5af304f,
 .tally-block-67608c66-7257-492b-bb2d-8134d1183456 {
-  font-family: var(--mw-script) !important;
-  font-size: 32px !important; font-weight: 700;
+  font-size: 36px !important; line-height: 1.2 !important;
   color: var(--mw-red) !important;
-  margin-bottom: 8px;
+  margin-bottom: 6px !important;
+  transform: rotate(-1deg); transform-origin: left center;
 }
-.tally-block-12782d5e-df6a-4d7a-a45b-1114e5af304f *,
-.tally-block-67608c66-7257-492b-bb2d-8134d1183456 * { font-family: var(--mw-script) !important; }
 
-/* Prompts */
 .tally-page-2 .tally-block-heading-3 h3,
-.tally-page-2 .tally-block-title h3 {
-  font-size: 15px !important; font-weight: 600 !important; color: var(--mw-ink-soft) !important;
-}
-.tally-page-2 .tally-block-heading-3 h3 * { font-weight: 600 !important; }
+.tally-page-2 .tally-block-title h3 { font-size: 20px !important; font-weight: 400 !important; color: var(--mw-ink-soft) !important; }
+.tally-page-2 .tally-block-heading-3 h3 * { font-weight: 400 !important; }
 
-/* Ruled-paper inputs */
-.tally-page-2 div[class*=' tally-block-input'] input,
+/* ruled textarea */
 .tally-page-2 .tally-block-textarea textarea {
   background-color: transparent !important;
   border: none !important;
   border-radius: 0 !important;
   box-shadow: none !important;
-  font-family: var(--mw-hand) !important;
-  font-size: 21px !important;
+  font-size: 23px !important;
   color: var(--mw-ink) !important;
-  padding-left: 8px !important;
-}
-.tally-page-2 div[class*=' tally-block-input'] input {
-  border-bottom: 1.5px solid var(--mw-paper-line) !important;
-  height: var(--mw-line) !important;
-}
-.tally-page-2 .tally-block-textarea textarea {
-  line-height: var(--mw-line) !important;
-  min-height: calc(var(--mw-line) * 4) !important;
-  padding-top: 0 !important; padding-bottom: 0 !important;
-  background-image: repeating-linear-gradient(transparent 0 calc(var(--mw-line) - 1.5px), var(--mw-paper-line) calc(var(--mw-line) - 1.5px) var(--mw-line)) !important;
+  line-height: var(--mw-rule) !important;
+  min-height: calc(var(--mw-rule) * 4) !important;
+  padding: 0 4px !important;
+  background-image: repeating-linear-gradient(transparent 0 calc(var(--mw-rule) - 2px), var(--mw-line) calc(var(--mw-rule) - 2px) var(--mw-rule)) !important;
   background-attachment: local !important;
   resize: vertical;
 }
-.tally-page-2 input:focus, .tally-page-2 textarea:focus {
-  box-shadow: none !important;
-  background-color: rgba(201,162,74,.08) !important;
-}
-.tally-page-2 input::placeholder, .tally-page-2 textarea::placeholder {
-  font-family: var(--mw-hand) !important; color: rgba(122,101,85,.45) !important;
-}
+.tally-page-2 .tally-block-textarea textarea:focus { background-color: rgba(212, 168, 72, 0.06) !important; }
 
-/* Sign-off */
 .tally-block-d9527709-8046-4c7c-8c76-718c4606953b {
   text-align: right;
-  font-family: var(--mw-script) !important;
-  font-size: 26px !important; font-weight: 700;
+  font-size: 28px !important; line-height: 1.3 !important;
   color: var(--mw-ink) !important;
-  line-height: 1.35 !important;
-  margin-top: 16px;
+  margin-top: 22px !important;
+  transform: rotate(-1.5deg); transform-origin: right center;
 }
-.tally-block-d9527709-8046-4c7c-8c76-718c4606953b * { font-family: var(--mw-script) !important; }
 
-/* ---------- Buttons ---------- */
+/* ---------- Buttons: sketchy pill with offset shadow ---------- */
+.tally-submit-button { justify-content: center !important; margin-top: 18px; }
 .tally-submit-button button {
-  font-weight: 700 !important; letter-spacing: .3px;
-  box-shadow: 0 4px 0 var(--mw-red-dark), 0 8px 18px rgba(140,29,34,.35) !important;
-  transition: transform .15s ease, box-shadow .15s ease !important;
+  height: auto !important;
+  padding: 12px 34px !important;
+  font-size: 23px !important; font-weight: 400 !important;
+  color: #FFF8EC !important;
+  background: var(--mw-red) !important;
+  border: 2px solid var(--mw-ink) !important;
+  border-radius: var(--mw-wob-pill) !important;
+  box-shadow: 4px 5px 0 var(--mw-ink) !important;
+  transition: transform .12s ease, box-shadow .12s ease !important;
 }
-.tally-submit-button button:hover { transform: translateY(-2px); }
-.tally-submit-button button:active { transform: translateY(2px); box-shadow: 0 1px 0 var(--mw-red-dark) !important; }
-.tally-page-2 .tally-submit-button button {
-  background: radial-gradient(circle at 35% 30%, #d4473f, var(--mw-red) 55%, var(--mw-red-dark)) !important;
-}
-.tally-back-button { color: var(--mw-ink-soft) !important; }
+.tally-submit-button button:hover { transform: translate(-1px, -2px) rotate(-1deg); box-shadow: 5px 7px 0 var(--mw-ink) !important; }
+.tally-submit-button button:active { transform: translate(3px, 4px); box-shadow: 1px 1px 0 var(--mw-ink) !important; }
+.tally-back-button, .tally-back-button * { color: var(--mw-ink-soft) !important; font-size: 19px !important; }
+
+.tally-validation-error { color: var(--mw-red) !important; font-size: 17px !important; }
 
 /* ---------- THANK-YOU · sealed envelope + key ---------- */
-.tally-page-thank-you {
-  background: var(--mw-paper);
-  text-align: center;
-  padding-top: 190px !important;
-  overflow: hidden;
-}
-/* envelope body */
-.tally-page-thank-you::before {
-  content: "";
-  position: absolute; left: 50%; top: 34px;
-  width: 200px; height: 128px; margin-left: -100px;
+.tally-page-thank-you { text-align: center; padding-top: 210px !important; overflow: hidden; }
+.tally-page-thank-you::before { /* tape becomes envelope body here */
+  top: 46px; left: 50%; width: 200px; height: 128px; margin-left: -100px;
+  clip-path: none; opacity: 1; transform: none; z-index: 1;
   background:
-    linear-gradient(to top right, transparent 49.5%, #e3d3b4 50%) left bottom / 50% 100% no-repeat,
-    linear-gradient(to top left, transparent 49.5%, #e3d3b4 50%) right bottom / 50% 100% no-repeat,
-    var(--mw-kraft);
-  border-radius: 4px;
-  box-shadow: 0 10px 24px rgba(0,0,0,.18);
+    linear-gradient(to top right, transparent 49.5%, #E8D7B6 50%) left bottom / 50% 100% no-repeat,
+    linear-gradient(to top left, transparent 49.5%, #E8D7B6 50%) right bottom / 50% 100% no-repeat,
+    var(--mw-paper-2);
+  border-radius: 10px 8px 12px 9px;
+  box-shadow: 0 12px 26px -10px rgba(0, 0, 0, 0.35);
   animation: mw-drop .6s ease-out both;
 }
-/* flap */
-.tally-page-thank-you::after {
+.tally-page-thank-you::after { /* flap */
   content: "";
-  position: absolute; left: 50%; top: 34px;
-  width: 200px; height: 74px; margin-left: -100px;
+  position: absolute; left: 50%; top: 46px; z-index: 2;
+  width: 200px; height: 76px; margin-left: -100px;
   clip-path: polygon(0 0, 100% 0, 50% 100%);
-  background: #e8d9bc;
+  background: #EDDDBF;
   transform-origin: top center;
-  animation: mw-flap .7s .6s cubic-bezier(.5,0,.3,1.4) both;
+  animation: mw-flap .7s .6s cubic-bezier(.5, 0, .3, 1.4) both;
 }
 .tally-block-03882688-753e-4889-97aa-3cbb1a4b152e { position: relative; }
 .tally-block-03882688-753e-4889-97aa-3cbb1a4b152e::before { /* wax seal */
   content: "";
-  position: absolute; left: 50%; top: -100px;
-  width: 46px; height: 46px; margin-left: -23px;
-  border-radius: 50%;
-  background: radial-gradient(circle at 35% 30%, #e05a4f, var(--mw-red) 55%, var(--mw-red-dark));
-  box-shadow: 0 0 0 4px rgba(179,40,45,.25), 0 3px 6px rgba(0,0,0,.3);
-  animation: mw-seal .45s 1.25s cubic-bezier(.3,1.6,.5,1) both;
+  position: absolute; left: 50%; top: -104px; z-index: 4;
+  width: 48px; height: 48px; margin-left: -24px;
+  border-radius: 48% 52% 50% 46% / 52% 46% 54% 48%;
+  background: radial-gradient(circle at 35% 30%, #E0605A, var(--mw-red) 55%, #8C1D22);
+  box-shadow: 0 0 0 4px rgba(184, 50, 47, 0.2), 0 3px 6px rgba(0, 0, 0, 0.3);
+  animation: mw-seal .45s 1.25s cubic-bezier(.3, 1.6, .5, 1) both;
 }
 .tally-page-thank-you h1 {
-  font-family: var(--mw-script) !important; color: var(--mw-red) !important;
-  font-size: 36px !important; font-weight: 700 !important;
+  font-size: 40px !important; font-weight: 400 !important; color: var(--mw-red) !important;
   animation: mw-fade .5s 1.6s both;
 }
-.tally-page-thank-you .tally-block-text { color: var(--mw-ink-soft); animation: mw-fade .5s 1.8s both; }
+.tally-page-thank-you .tally-block-text { color: var(--mw-ink-soft) !important; font-size: 19px !important; animation: mw-fade .5s 1.8s both; }
 
-/* the key */
-.tally-block-c982f668-6215-4050-890f-348f6e3f47b6 { animation: mw-key .6s 2s cubic-bezier(.3,1.5,.5,1) both; }
+.tally-block-c982f668-6215-4050-890f-348f6e3f47b6 { animation: mw-key .6s 2s cubic-bezier(.3, 1.5, .5, 1) both; }
 .tally-block-c982f668-6215-4050-890f-348f6e3f47b6 h2 {
-  display: inline-flex !important; align-items: center; gap: 14px;
-  margin: 8px auto 12px !important;
-  padding: 14px 28px 14px 18px !important;
-  background: linear-gradient(135deg, #e4c46f, var(--mw-gold) 60%, #a8842f);
-  color: #3a2a0c !important;
-  border-radius: 40px 10px 10px 40px;
+  display: inline-flex !important; align-items: center; gap: 12px;
+  margin: 10px auto 14px !important;
+  padding: 12px 28px 12px 18px !important;
+  background: linear-gradient(135deg, #EED48A, var(--mw-gold) 60%, #B08A34);
+  color: #3A2A0C !important;
+  border: 2px solid var(--mw-ink);
+  border-radius: var(--mw-wob-pill);
+  box-shadow: 4px 5px 0 var(--mw-ink);
   font-family: 'Courier New', monospace !important;
   font-size: 30px !important; font-weight: 700 !important; letter-spacing: 4px;
-  box-shadow: 0 6px 16px rgba(168,132,47,.4), inset 0 1px 0 rgba(255,255,255,.5);
+  transform: rotate(-1.5deg);
   user-select: all; -webkit-user-select: all;
 }
-.tally-block-c982f668-6215-4050-890f-348f6e3f47b6 h2::before {
-  content: "🔑"; font-size: 26px; letter-spacing: 0;
-}
+.tally-block-c982f668-6215-4050-890f-348f6e3f47b6 h2::before { content: "🔑"; font-size: 26px; letter-spacing: 0; }
 
 @keyframes mw-drop { from { transform: translateY(-40px); opacity: 0; } to { transform: none; opacity: 1; } }
 @keyframes mw-flap { from { transform: rotateX(180deg); } to { transform: rotateX(0deg); } }
 @keyframes mw-seal { from { transform: scale(2.4); opacity: 0; } to { transform: scale(1); opacity: 1; } }
 @keyframes mw-fade { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
-@keyframes mw-key  { from { opacity: 0; transform: scale(.6) rotate(-8deg); } to { opacity: 1; transform: none; } }
+@keyframes mw-key  { from { opacity: 0; transform: scale(.6) rotate(-10deg); } to { opacity: 1; transform: rotate(0deg); } }
 
 @media (prefers-reduced-motion: reduce) {
   .tally-page-thank-you *, .tally-page-thank-you::before, .tally-page-thank-you::after,
@@ -286,18 +292,20 @@
 
 /* ---------- Mobile ---------- */
 @media (max-width: 576px) {
-  .tally-page { padding: 30px 20px 26px !important; margin: 12px 8px !important; }
-  .tally-page-1 { border-width: 7px; }
-  .tally-page-1::after { width: 56px; height: 68px; font-size: 10px; top: 14px; right: 14px; }
-  .tally-page-1 .tally-block-form-title { padding-right: 64px; }
-  .tally-block-form-title h1 { font-size: 30px !important; }
-  .tally-page-1 div[class*=' tally-block-input'] input { font-size: 18px !important; }
-  .tally-page-2 { background: var(--mw-paper); }
-  .tally-page-2 .tally-block-text, .tally-page-2 .tally-block-heading-3 { padding-left: 0; }
-  .tally-page-2 div[class*=' tally-block-input'] input,
-  .tally-page-2 .tally-block-textarea textarea { font-size: 19px !important; padding-left: 2px !important; }
+  .tally-page { margin: 22px 10px 28px !important; padding: 52px 22px 34px !important; }
+  .tally-page::before { width: 104px; margin-left: -52px; height: 26px; top: -11px; }
+  .tally-page-1 { outline-offset: -9px; }
+  .tally-page-1::after { width: 60px; height: 72px; font-size: 14px; top: 22px; right: 20px; }
+  .tally-page-1 .tally-block-form-title { padding-right: 70px; }
+  .tally-block-form-title h1 { font-size: 34px !important; }
+  .tally-block-title h3 { font-size: 20px !important; }
+  .tally-app div[class*=' tally-block-input'] input { font-size: 21px !important; }
+  .tally-page-1 .tally-multiple-choice-option > div { font-size: 19px !important; padding: 8px 16px !important; }
+  .tally-page-2 { background: radial-gradient(rgba(59,42,32,.035) 1px, transparent 1.3px) 0 0 / 7px 7px, var(--mw-paper); }
   .tally-block-12782d5e-df6a-4d7a-a45b-1114e5af304f,
-  .tally-block-67608c66-7257-492b-bb2d-8134d1183456 { font-size: 27px !important; }
-  .tally-block-c982f668-6215-4050-890f-348f6e3f47b6 h2 { font-size: 22px !important; letter-spacing: 2px; padding: 12px 20px 12px 14px !important; }
-  .tally-page-thank-you h1 { font-size: 30px !important; }
+  .tally-block-67608c66-7257-492b-bb2d-8134d1183456 { font-size: 30px !important; }
+  .tally-page-2 .tally-block-textarea textarea { font-size: 21px !important; }
+  .tally-submit-button button { width: 100%; }
+  .tally-block-c982f668-6215-4050-890f-348f6e3f47b6 h2 { font-size: 22px !important; letter-spacing: 2px; padding: 10px 18px 10px 14px !important; }
+  .tally-page-thank-you h1 { font-size: 32px !important; }
 }
